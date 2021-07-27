@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            width: 100%;
+            display: grid;
+            place-content: center;
+            counter-reset: score;
+        }
+        img {
+            width: 100%;
+            object-fit: cover;
+        }
+        .phone {
+            width: 300px;
+            height: 600px;
+            position: relative;
+            border: 8px solid black;
+            border-radius: 40px;
+            background-color: #7a72a5;
+            box-shadow: 0 19px 38px rgb(61, 61, 61, 0.5);
+            overflow: hidden;
+            color: white;
+            font-family: 'Segoe UI'
+        }
+        .layer-1 {
+            position: absolute;
+            z-index:1;
+            height: 420px;
+            width: 80px;
+            bottom: 0;
+            right: 60px;
+        }
+        .layer-2 {
+            position: absolute;
+            z-index:2;
+            height: 420px;
+            width: 80px;
+            bottom: 0;
+            left: 60px;
+        }
+        .layer-3 {
+            position: absolute;
+            z-index:3;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            width: 220px;
+            height: 400px;
+            background-image: url("./tierra.jpg");
+            border-top: 5px solid black;
+            border-left: 3px solid black;
+            border-right: 3px solid black;
+            background-size: 100px;
+            bottom: 0;
+        }
+        .layer-3::after, .layer-5::after, .layer-7:after {
+            position: absolute;
+            content: " ";
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(135deg, rgb(78, 100, 100) 25%, transparent 25%) -50px 0,
+                        linear-gradient(-135deg, rgb(78, 100, 100) 25%, transparent 25%) -50px 0,
+                        linear-gradient(45deg, rgb(78, 100, 100) 25%, transparent 25%),
+                        linear-gradient(-45deg, rgb(78, 100, 100) 25%, transparent 25%);
+            background-size: 40px 100px;
+            background-position: 140px 0 0 30px 0;
+        }
+        .layer-4 {
+            position: absolute;
+            z-index:4;
+            height: 320px;
+            width: 80px;
+            bottom: 0;
+            left: 10px;
+            border-radius: 0 0 0 30px;
+        }
+        .layer-5 {
+            position: absolute;
+            z-index:5;
+            left: 0;
+            margin: 0 auto;
+            width: 120px;
+            height: 300px;
+            background-image: url("./tierra.jpg");
+            border-top: 5px solid black;
+            border-right: 3px solid black;
+            background-size: 150px;
+            bottom: 0;
+            border-radius:  0 0 0 30px;
+        }
+        .layer-6 {
+            position: absolute;
+            z-index:6;
+            height: 220px;
+            width: 80px;
+            bottom: 0;
+            right: 20px;
+            border-radius:  0 0 30px 0;
+        }
+        .layer-7 {
+            position: absolute;
+            z-index:7;
+            right: 0;
+            margin: 0 auto;
+            width: 150px;
+            height: 200px;
+            background-image: url("./tierra.jpg");
+            background-size: 150px;
+            border-top: 5px solid black;
+            border-left: 3px solid black;
+            border-radius:  0 0 30px 0;
+            bottom: 0;
+        }
+        .layer-8 {
+            position: absolute;
+            z-index:8;
+            width: 100px;
+            height: 100px;
+            background-color: rgb(65, 85, 85);
+            bottom: 0;
+            left: 0;
+            border-radius: 10px 50px 0 30px;
+        }
+        .layer-9 {
+            position: absolute;
+            z-index:9;
+            width: 100px;
+            height: 100px;
+            background-color: rgb(65, 85, 85);
+            bottom: 0;
+            right: 0;
+            border-radius: 50% 30px 30px 0;
+        }
+        .layer-10 {
+            position: absolute;
+            z-index:10;
+            width: 100px;
+            height: 60px;
+            background-color: rgb(38, 59, 59);
+            bottom: 0;
+            right: 50%;
+            border-radius: 50% 50% 0 0;
+        }
+        .layer-8::after {
+            position: absolute;
+            content: " ";
+            width: 200px;
+            height: 200px;
+            background-image: url("./tree.png");
+            background-size: cover;
+            top: -130%;
+            left: -60%;
+        }
+
+
+        @keyframes movement {
+            from {
+                transform: translateY(0px)
+            }
+            50%  {
+                transform: translateY(-40px)
+            }
+            to {
+                transform: translateY(40px)
+            }
+        }
+
+        .layer-1,
+        .layer-2,
+        .layer-4,
+        .layer-6 {
+            animation-name: movement;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+
+        input[type="checkbox"] {
+            width: 80px;
+            height: 80px;
+            margin: 0;
+            position: absolute;
+            opacity: 0;
+        }
+
+        input[type="checkbox"]:hover {
+            cursor: crosshair;
+        }
+
+        input:checked {
+            counter-increment: score;
+        }
+
+        h2, h3 {
+            text-align: center;
+            margin: 10px 0 0 0;
+        }
+
+        .total-count::after {
+            content: counter(score)
+        }
+    </style>
+</head>
+<body>
+    <div class="phone">
+        <div class="layer-1"><input class="uno" type="checkbox"><img src="./Selection.png" alt="" srcset=""></div>
+        <div class="layer-2"><input type="checkbox"><img src="./Selection.png" alt="" srcset=""></div>
+        <div class="layer-3"></div>
+        <div class="layer-4"><input type="checkbox"><img src="./Selection.png" alt="" srcset=""></div>
+        <div class="layer-5"></div>
+        <div class="layer-6"><input type="checkbox"><img src="./Selection.png" alt="" srcset=""></div>
+        <div class="layer-7"></div>
+        <div class="layer-8"></div>
+        <div class="layer-9"></div>
+        <div class="layer-10"></div>
+        <h2>Demon hunter</h2>
+        <h3 class="total-count">Score: </h3>
+    </div>
+</body>
+</html>
